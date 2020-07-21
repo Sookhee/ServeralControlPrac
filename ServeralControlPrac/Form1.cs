@@ -26,10 +26,10 @@ namespace ServeralControlPrac
             btn.Text = "클릭!";
             btn.Name = "check";
 
-            cb1.Location = new Point(100, 10);
-            cb2.Location = new Point(100, 40);
-            cb3.Location = new Point(100, 70);
-            btn.Location = new Point(100, 100);
+            cb1.Location = new Point(10, 10);
+            cb2.Location = new Point(10, 40);
+            cb3.Location = new Point(10, 70);
+            btn.Location = new Point(10, 100);
 
             btn.Click += ButtonClick;
             Controls.Add(cb1);
@@ -37,27 +37,59 @@ namespace ServeralControlPrac
             Controls.Add(cb3);
             Controls.Add(btn);
 
+            GroupBox gb1 = new GroupBox();
+            GroupBox gb2 = new GroupBox();
+            gb1.Text = "식물";
+            gb2.Text = "물고기";
+
             RadioButton rb1 = new RadioButton();  
             RadioButton rb2 = new RadioButton();  
             RadioButton rb3 = new RadioButton();
+            RadioButton rb4 = new RadioButton();
+            RadioButton rb5 = new RadioButton();
             Button btn2 = new Button();
+            Button btn3 = new Button();
 
             rb1.Text = "감자";
             rb2.Text = "고구마";
             rb3.Text = "토마토";
-            btn2.Text = "클릭!";
-            btn2.Name = "radio";
+            rb4.Text = "광어";
+            rb5.Text = "우럭";
 
-            rb1.Location = new Point(200, 10);
-            rb2.Location = new Point(200, 40);
-            rb3.Location = new Point(200, 70);
-            btn2.Location = new Point(200, 100);
+            btn2.Text = "식물 클릭!";
+            btn2.Name = "radio1";
+
+            btn3.Text = "물고기 클릭!";
+            btn3.Name = "radio2";
+
+            gb1.Size = new Size(120, 140);
+            gb2.Size = new Size(120, 140);
+            gb1.Location = new Point(140, 10);
+            gb2.Location = new Point(260, 10);
+
+            rb1.Location = new Point(10, 30);
+            rb2.Location = new Point(10, 60);
+            rb3.Location = new Point(10, 90);
+
+            rb4.Location = new Point(10, 30);
+            rb5.Location = new Point(10, 60);
+
+            btn2.Location = new Point(140, 160);
             btn2.Click += ButtonClick;
+            btn3.Location = new Point(260, 160);
+            btn3.Click += ButtonClick;
 
-            Controls.Add(rb1);
-            Controls.Add(rb2);
-            Controls.Add(rb3);
+            gb1.Controls.Add(rb1);
+            gb1.Controls.Add(rb2);
+            gb1.Controls.Add(rb3);
+
+            gb2.Controls.Add(rb4);
+            gb2.Controls.Add(rb5);
+
+            Controls.Add(gb1);
+            Controls.Add(gb2);
             Controls.Add(btn2);
+            Controls.Add(btn3);
         }
 
         private void ButtonClick(object sender, EventArgs e)
@@ -68,8 +100,9 @@ namespace ServeralControlPrac
                 case "check":
                     showCheckboxResult();
                     break;
-                case "radio":
-                    showRadioResult();
+                case "radio1":
+                case "radio2":
+                    showRadioResult(btn.Name);
                     break;
             }
 
@@ -95,14 +128,25 @@ namespace ServeralControlPrac
             MessageBox.Show(string.Join(", ", list));
         }
 
-        private void showRadioResult()
+        private void showRadioResult(string btnName)
         {
             foreach(var item in Controls)
             {
-                RadioButton rb = item as RadioButton;
-                if (rb != null && rb.Checked)
+
+                GroupBox gb = item as GroupBox;
+                if(gb != null)
                 {
-                    MessageBox.Show(rb.Text);
+                    if(gb.Text == "식물" && btnName == "radio1")
+                    {
+                        foreach(var it in gb.Controls)
+                        {
+                            RadioButton rb = it as RadioButton;
+                            if(rb != null && rb.Checked)
+                            {
+                                MessageBox.Show(rb.Text);
+                            }
+                        }
+                    }
                 }
             }
         }
