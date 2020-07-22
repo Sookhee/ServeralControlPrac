@@ -15,6 +15,12 @@ namespace ServeralControlPrac
         public Form1()
         {
             InitializeComponent();
+
+            Label lb1 = new Label();
+            lb1.Text = "레이블입니다";
+            lb1.Location = new Point(140, 200);
+            Controls.Add(lb1);
+
             CheckBox cb1 = new CheckBox();
             CheckBox cb2 = new CheckBox();
             CheckBox cb3 = new CheckBox();
@@ -142,6 +148,17 @@ namespace ServeralControlPrac
                         {
                             RadioButton rb = it as RadioButton;
                             if(rb != null && rb.Checked)
+                            {
+                                MessageBox.Show(rb.Text);
+                            }
+                        }
+                    }
+                    else if(gb.Text == "물고기" && btnName == "radio2")
+                    {
+                        foreach (var it in gb.Controls)
+                        {
+                            RadioButton rb = it as RadioButton;
+                            if (rb != null && rb.Checked)
                             {
                                 MessageBox.Show(rb.Text);
                             }
